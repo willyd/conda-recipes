@@ -1,0 +1,14 @@
+package:
+  name: msvc-select
+  version: 1.0.0
+
+source:
+  path: src
+
+build:
+  number: 1
+
+about:
+  home: https://github.com/willyd/conda-recipes
+  license: MIT (https://opensource.org/licenses/MIT)
+  summary: "Conda helper package to select a version of MS Visual Studio"
