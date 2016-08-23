@@ -1,0 +1,13 @@
+package:
+  name: cmake-helper
+  version: "1.0.0"
+
+requirements:
+  run:
+    - cmake
+    - ninja
+    - jinja2
+
+about:
+  home: https://github.com/willyd/crew
+  summary: Package that installs helper utility files for build project with CMake
