@@ -1,0 +1,38 @@
+{% set version = "0.3.4.b1" %}
+{% import 'config.yaml' as cfg %}
+
+package:
+  name: glog
+  version: {{ version }}{{ cfg.msvc_version_suffix }}
+
+source:
+  git_url: https://github.com/willyd/glog.git
+  git_rev: relocatable
+
+build:
+  number: 2
+  features:
+    - {{ cfg.msvc_feature }} # [win]
+  msvc_compiler: {{ cfg.msvc_compiler }}
+  skip: true # [not win]
+
+requirements:
+  build:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    - cmake-helper  # [win]
+    - toolchain
+    - ninja
+    - cmake >=3.1
+    - gflags 2.1.2*{{ cfg.msvc_version_suffix }}
+
+  run:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    - cmake-helper  # [win]
+    - gflags 2.1.2*{{ cfg.msvc_version_suffix }}
+
+about:
+  home: https://github.com/google/glog
+
+extra:
+  recipe-maintainers:
+    - willyd
