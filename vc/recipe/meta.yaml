@@ -1,0 +1,21 @@
+{% import 'config.yaml' as cfg %}
+
+package:
+  name: vc
+  version: {{ cfg.msvc_version }}
+
+build:
+  number: 1
+  track_features:
+    - {{ cfg.msvc_feature }}
+  skip: true  # [not win]
+
+
+about:
+  home: https://github.com/willyd/conda-recipes
+  license: Modified BSD License (3-clause)
+  summary: A meta-package to track VC features.
+
+extra:
+  recipe-maintainers:
+    - willyd
