@@ -1,0 +1,38 @@
+{% set version = "2.1.2.b1" %}
+{% import 'config.yaml' as cfg %}
+
+package:
+  name: gflags
+  version: {{ version }}{{ cfg.msvc_version_suffix }}
+
+source:
+  git_url: https://github.com/gflags/gflags.git
+  git_rev: 74bcd20c0e5b904a67e37abf0c1262824ff9030c
+
+build:
+  number: 2
+  features:
+    - {{ cfg.msvc_feature }} # [win]
+  msvc_compiler: {{ cfg.msvc_compiler }}
+
+
+requirements:
+  build:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    - cmake-helper  # [win]
+    - toolchain
+    - ninja
+    - cmake >=3.1
+
+  run:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    - cmake-helper  # [win]
+
+about:
+  home: https://github.com/gflags/gflags
+  license: BSD
+  summary: A C++ library that implements commandline flags processing.
+
+extra:
+  recipe-maintainers:
+    - willyd
