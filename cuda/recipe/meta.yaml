@@ -1,0 +1,23 @@
+{% import 'config.yaml' as cfg %}
+
+package:
+  name: cuda
+  version: {{ cfg.cuda_feature_package_version }}
+
+build:
+  number: 0
+  track_features:
+    - {{ cfg.cuda_feature }}
+  skip: true  # [not win]
+
+requirements:
+  run:
+    - cudatoolkit {{ cuda_version }}
+
+about:
+  license: Modified BSD License (3-clause)
+  summary: A meta-package to track cuda features.
+
+extra:
+  recipe-maintainers:
+    - willyd
