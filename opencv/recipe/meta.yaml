@@ -1,0 +1,55 @@
+{% set version = "3.1.0" %}
+{% set filename = "opencv3-%s.zip" % version %}
+{% import 'config.yaml' as cfg %}
+
+package:
+  name: opencv
+  version: {{ version }}{{ cfg.msvc_version_suffix }}{{ cfg.cuda_version_suffix }}
+
+source:
+  fn: {{ filename }}
+  url: https://github.com/opencv/opencv/archive/{{ version }}.zip
+  sha1: 8c932b68fe2e1575e88dde759ab1ed1d53d6f41b
+
+build:
+  number: 3
+  features:
+    - {{ cfg.msvc_feature }} # [win]
+    {% if cfg.cuda_version %}
+    - {{ cfg.cuda_feature }} # [win]
+    {% endif %}
+  msvc_compiler: {{ cfg.msvc_compiler }}
+
+requirements:
+  build:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    {% if cfg.cuda_version %}
+    - cuda  {{ cfg.cuda_feature_package_version }}
+    {% endif %}
+    - cmake-helper  # [win]
+    - toolchain
+    - ninja # [win]
+    - cmake >=3.1
+    - git # [win]
+    - python
+    - numpy
+    - alt-zlib 1.2*{{cfg.msvc_version_suffix}}
+
+  run:
+    - vc {{ cfg.msvc_feature_package_version }}* # [win]
+    {% if cfg.cuda_version %}
+    - cuda  {{ cfg.cuda_feature_package_version }} # [win]
+    {% endif %}
+    - cmake-helper  # [win]
+    - python
+    - numpy
+    - alt-zlib 1.2*{{cfg.msvc_version_suffix}}
+
+about:
+  home: http://opencv.org/
+  license: BSD 3-clause
+  summary: Computer vision and machine learning software library.
+
+extra:
+  recipe-maintainers:
+    - willyd
